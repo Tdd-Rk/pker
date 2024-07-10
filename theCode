@@ -1,0 +1,871 @@
+import random
+#try:
+
+npl = int(input('How many players are there? 2-10\n'))
+#npl = 2
+
+x1 = input(
+    'What is your first card?\ne.g. AH,TS,KD,QD,JD,KH,QH,JH,QD,JD etc\n')
+x2 = input('What is your second card?\n')
+x1 = x1.upper()
+x2 = x2.upper()
+
+if x1[1] == 'D':
+  x11 = x1[0] + '♦'
+elif x1[1] == 'H':
+  x11 = x1[0] + '♥'
+elif x1[1] == 'S':
+  x11 = x1[0] + '♠'
+elif x1[1] == 'C':
+  x11 = x1[0] + '♣'
+if x2[1] == 'D':
+  x22 = x2[0] + '♦'
+elif x2[1] == 'H':
+  x22 = x2[0] + '♥'
+elif x2[1] == 'S':
+  x22 = x2[0] + '♠'
+elif x2[1] == 'C':
+  x22 = x2[0] + '♣'
+
+
+def start(px11, px22):
+  deck = [
+      "A♥", "2♥", "3♥", "4♥", "5♥", "6♥", "7♥", "8♥", "9♥", "T♥", "J♥", "Q♥",
+      "K♥", "A♣", "2♣", "3♣", "4♣", "5♣", "6♣", "7♣", "8♣", "9♣", "T♣", "J♣",
+      "Q♣", "K♣", "K♦", "Q♦", "J♦", "T♦", "9♦", "8♦", "7♦", "6♦", "5♦", "4♦",
+      "3♦", "2♦", "A♦", "K♠", "Q♠", "J♠", "T♠", "9♠", "8♠", "7♠", "6♠", "5♠",
+      "4♠", "3♠", "2♠", "A♠"
+  ]
+  suits = ["♥", "♣", "♦", "♠"]
+  rank = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+  table = []
+  x = []
+  x.append(px11)
+  x.append(px22)
+  pl1 = [x]
+  deck.remove(px11)
+  deck.remove(px22)
+  pl2 = []
+  pl3 = []
+  pl4 = []
+  pl5 = []
+  pl6 = []
+  pl7 = []
+  pl8 = []
+  pl9 = []
+  pl10 = []
+  return (deck, suits, rank, table, pl1, pl2, pl3, pl4, pl5, pl6, pl7, pl8,
+          pl9, pl10)
+
+
+def deal(deck,pPlayers):
+  for i in range(pPlayers):
+    hand = []
+    for j in range(2):
+      card = random.choice(deck)
+      hand.append(card)
+      deck.remove(card)
+    if i == 0:
+      hand = pl1
+    elif i == 1:
+      pl2.append(hand)
+    elif i == 2:
+      pl3.append(hand)
+    elif i == 3:
+      pl4.append(hand)
+    elif i == 4:
+      pl5.append(hand)
+    elif i == 5:
+      pl6.append(hand)
+    elif i == 6:
+      pl7.append(hand)
+    elif i == 7:
+      pl8.append(hand)
+    elif i == 8:
+      pl9.append(hand)
+    elif i == 9:
+      pl10.append(hand)
+    else:
+      quit()
+    print("Player " + str(i + 1) + " hand: " + str(hand))
+
+
+def rounds(pround):
+  if pround == 1:
+    for i in range(3):
+      card = random.choice(deck)
+      deck.remove(card)
+      table.append(card)
+      print(card)
+  else:
+    card = random.choice(deck)
+    deck.remove(card)
+    table.append(card)
+    print(card)
+  return (table)
+
+
+#ex = ['A♦','T♦','K♦','J♦','Q♦']
+#ex = ['A♣','T♦','K♣','J♦','Q♦']
+#ex = ['2♣','T♦','K♣','3♣','Q♣']
+
+
+def quality(pHand):
+  qal = ""
+  arb = 0
+  arb2 = 0
+  arb3 = 0
+  arb4 = 0
+  arb5 = 0
+  arb6 = 0
+
+  
+  all = []
+  all.append(pHand[0][0])
+  all.append(pHand[0][1])
+  for i in range(len(table)):
+    all.append(table[i])
+  selecti = []
+  #print(all)
+  y = 0
+  for c in all:
+    for i in range(7):
+      if c[0] == all[i][0] and c != all[i]: #MAKE SELECTI REMOVE REPEATS... TOUGH
+        y += 1
+        if c[0] == 'A':
+          selecti.append(14)
+        elif c[0] == 'K':
+          selecti.append(13)
+        elif c[0] == 'Q':
+          selecti.append(12)
+        elif c[0] == 'J':
+          selecti.append(11)
+        elif c[0] == 'T':
+          selecti.append(10)
+        else:
+          selecti.append(int(c[0]))
+  #print(selecti)
+  selectin = []
+  for i in selecti:
+    if i not in selectin:
+      selectin.append(i)
+  #print(selectin)
+    
+    # if c[0] == all[1][0] and c != all[1]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+
+    
+    # if c[0] == all[2][0] and c != all[2]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+
+
+    
+    # if c[0] == all[3][0] and c != all[3]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+
+    
+    # if c[0] == all[4][0] and c != all[4]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+
+    
+    # if c[0] == all[5][0] and c != all[5]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+
+    
+    # if c[0] == all[6][0] and c != all[6]:
+    #   y += 1
+    #   if c[0] == 'A':
+    #     selecti.append(14)
+    #   elif c[0] == 'K':
+    #     selecti.append(13)
+    #   elif c[0] == 'Q':
+    #     selecti.append(12)
+    #   elif c[0] == 'J':
+    #     selecti.append(11)
+    #   elif c[0] == 'T':
+    #     selecti.append(10)
+    #   else:
+    #     selecti.append(int(c[0]))
+  
+  if y == 0:
+    qal = 'High Card'
+    arb = 1
+    select = []
+    for card in all:
+      if card[0] == 'A':
+        select.append(14)
+      elif card[0] == 'K':
+        select.append(13)
+      elif card[0] == 'Q':
+        select.append(12)
+      elif card[0] == 'J':
+        select.append(11)
+      elif card[0] == 'T':
+        select.append(10)
+      else:
+        select.append(int(card[0]))
+    arb2 = max(select)
+    select.remove(arb2)
+    arb3 = max(select)
+    select.remove(arb3)
+    arb4 = max(select)
+    select.remove(arb4)
+    arb5 = max(select)
+    select.remove(arb5)
+    arb6 = max(select)
+
+  if y == 2:
+    qal = 'Pair'
+    arb = 2
+    select = []
+    for card in all:
+      if card[0] == 'A':
+        select.append(14)
+      elif card[0] == 'K':
+        select.append(13)
+      elif card[0] == 'Q':
+        select.append(12)
+      elif card[0] == 'J':
+        select.append(11)
+      elif card[0] == 'T':
+        select.append(10)
+      else:
+        select.append(int(card[0]))
+   
+    arb2 = max(selectin)
+    arb3 = arb2
+    select.remove(arb2)
+    select.remove(arb3)
+    arb4 = max(select)
+    select.remove(arb4)
+    arb5 = max(select)
+    select.remove(arb5)
+    arb6 = max(select)
+
+  threePair = False
+  c = 0
+  for i in selectin:
+    if selecti.count(i) == 2:
+      c +=1
+  if len(selectin) > 2 and c == len(selectin):
+      threePair = True
+
+
+    # for i in range(6):
+    #   if selecti[i] != selecti[0]:
+
+  if y == 4 or threePair:
+    qal = 'Two pair'
+    arb = 3
+    arb2 = max(selectin)
+    arb3 = arb2
+    n = selectin
+    n.remove(arb2)
+    #print(selectin)
+    arb4 = max(n)
+    arb5 = arb4
+    
+    # for i in h:
+    #   if i != arb2:
+    #     arb4 = i
+    #     arb5 = arb4
+    select = []
+    for card in all:
+      if card[0] == 'A':
+        select.append(14)
+      elif card[0] == 'K':
+        select.append(13)
+      elif card[0] == 'Q':
+        select.append(12)
+      elif card[0] == 'J':
+        select.append(11)
+      elif card[0] == 'T':
+        select.append(10)
+      else:
+        select.append(int(card[0]))
+    #print(select)
+    #print(selecti,'lol')
+    select.remove(arb2)
+    select.remove(arb3)
+    select.remove(arb4)
+    select.remove(arb5)
+    arb6 = max(select)
+
+  
+  #print(selecti)
+  if y == 6 and not threePair:
+    qal = 'Three of a kind' 
+    arb = 4
+    select = []
+    for card in all:
+      if card[0] == 'A':
+        select.append(14)
+      elif card[0] == 'K':
+        select.append(13)
+      elif card[0] == 'Q':
+        select.append(12)
+      elif card[0] == 'J':
+        select.append(11)
+      elif card[0] == 'T':
+        select.append(10)
+      else:
+        select.append(int(card[0]))
+    m = select
+    arb2 = max(selectin)
+    arb3 = arb2
+    arb4 = arb3
+    m.remove(arb4)
+    m.remove(arb3)
+    m.remove(arb2)
+    arb5 = max(m)
+    m.remove(arb5)
+    arb6 = max(m)
+  
+
+  for i in range(10):
+    s = []
+    s.append(f'{rank[i]}')
+    s.append(f'{rank[i+1]}')
+    s.append(f'{rank[i+2]}')
+    s.append(f'{rank[i+3]}')
+    s.append(f'{rank[i+4]}')
+    vals = []
+    for val in all:
+      vals.append(val[0])
+    if set(s).issubset(set(vals)):
+      qal = 'Straight'
+      arb = 5
+      if i == 0:
+        arb2 = 14
+      else:
+        arb2 = i+5
+      arb3 = i+4
+      arb4 = i+3
+      arb5 = i+2
+      arb6 = i+1
+      
+      
+  b = []
+  for suit in suits:
+    pips = []
+    for pip in all:
+      pips.append(pip[1])
+    if pips.count(str(suit)) == 5:
+      
+      qal = 'Flush'
+      #print('.'*20)
+      arb = 6
+      selec = []
+      for card in all:
+        if card[1] == suit:
+          if card[0] == 'A':
+            selec.append(14)
+          elif card[0] == 'K':
+            selec.append(13)
+          elif card[0] == 'Q':
+            selec.append(12)
+          elif card[0] == 'J':
+            selec.append(11)
+          elif card[0] == 'T':
+            selec.append(10)
+          else:  
+            selec.append(int(card[0]))
+      arb2 = max(selec)
+      selec.remove(arb2)
+      arb3 = max(selec)
+      selec.remove(arb3)
+      arb4 = max(selec)
+      selec.remove(arb4)
+      arb5 = max(selec)
+      selec.remove(arb5)
+      arb6 = max(selec)
+
+
+  mulPair = False
+  k = 0
+  for i in selectin:
+    if selecti.count(i) == 6:
+      k +=3
+    elif selecti.count(i) == 2:
+      k +=1
+  if len(selectin) > 4:
+    mulPair = True
+      
+  
+  if y == 8 or mulPair:
+    qal = 'Full House'
+    arb = 7
+    nl = []
+    #print('/././.'*100)
+    for i in selectin:
+      if selecti.count(i) == 6:
+        nl.append(i)
+    #print(nl)
+    arb2 = max(nl)
+    arb3 = arb2
+    arb4 = arb3
+    #print('hii',selectin)
+    selectin.remove(arb2)
+    #print('hey',selectin)
+    arb5 = max(selectin)
+    arb6 = arb5
+    #print(arb5,arb6)
+    
+    arb5 = max(selecti)
+    arb6 = arb5
+    # higherC = max(selecti)
+    # arb2 = higherC
+    # arb3 = higherC
+    # arb4 = higherC
+    # arb5 = higherC
+  fok = False
+  if y >= 12:
+    select = []
+    for card in all:
+      if card[0] == 'A':
+        select.append(14)
+      elif card[0] == 'K':
+        select.append(13)
+      elif card[0] == 'Q':
+        select.append(12)
+      elif card[0] == 'J':
+        select.append(11)
+      elif card[0] == 'T':
+        select.append(10)
+      else:
+        select.append(int(card[0]))
+    
+    for i in select:
+      if select.count(i) == 4:
+        fok = True
+  if fok:
+    qal = 'Four of a kind'
+    arb = 8
+    #print(','*100)
+    for i in select:
+      if select.count(i) == 4:
+        arb2 = i
+        arb3 = arb2
+        arb4 = arb3
+        arb5 = arb4
+    #print(select)
+    #print(arb2,arb3,arb4,arb5)
+    select.remove(arb2)
+    select.remove(arb3)
+    select.remove(arb4)
+    select.remove(arb5)
+    arb6 = max(select)
+      
+        
+    
+
+  for suit in suits:
+    for i in range(10):
+      sf = []
+      sf.append(f'{rank[i]}{suit}')
+      sf.append(f'{rank[i+1]}{suit}')
+      sf.append(f'{rank[i+2]}{suit}')
+      sf.append(f'{rank[i+3]}{suit}')
+      sf.append(f'{rank[i+4]}{suit}')
+      if set(sf).issubset(set(all)):
+        qal = 'Straight Flush'
+        arb = 9
+        arb2 = i
+        arb3 = i+1
+        arb4 = i+2
+        arb5 = i+3
+        arb6 = i+4
+
+  for suit in suits:
+    rf = [f'A{suit}', f'K{suit}', f'Q{suit}', f'J{suit}', f'10{suit}']
+    if set(rf).issubset(set(all)):
+      qal = 'Royal Flush'
+      arb = 10
+      
+  return (qal, arb, arb2, arb3, arb4, arb5, arb6)
+
+
+tot = []
+for i in range(1000):
+  deck, suits, rank, table, pl1, pl2, pl3, pl4, pl5, pl6, pl7, pl8, pl9, pl10 = start(
+      x11, x22)
+
+  deal(deck, npl)
+  for i in range(1, 4):
+    rounds(i)
+
+  # print(quality(pl1)[0])
+  # print(quality(pl2)[0])
+  # print(quality(pl3)[0])
+  # print(quality(pl4)[0])
+  # print(quality(pl5)[0])
+  # print(quality(pl6)[0])
+  # print(quality(pl7)[0])
+  # print(quality(pl8)[0])
+  # print(quality(pl9)[0])
+  # print(quality(pl10)[0])
+
+  #f = True
+  scoring = []
+  if pl1:
+    scoring.append(quality(pl1)[1])
+  if pl2:
+    scoring.append(quality(pl2)[1])
+  if pl3:
+    scoring.append(quality(pl3)[1])
+  if pl4:
+    scoring.append(quality(pl4)[1])
+  if pl5:
+    scoring.append(quality(pl5)[1])
+  if pl6:
+    scoring.append(quality(pl6)[1])
+  if pl7:
+    scoring.append(quality(pl7)[1])
+  if pl8:
+    scoring.append(quality(pl8)[1])
+  if pl9:
+    scoring.append(quality(pl9)[1])
+  if pl10:
+    scoring.append(quality(pl10)[1])
+
+  # if quality(pl1)[1] == quality(pl2)[1]:
+  #   if quality(pl1)[2] < quality(pl2)[2]:
+  #     winner = 1
+  temp = max(scoring)
+  f = True
+  #print(scoring)
+  #print(temp)
+  for i in range(len(scoring)):
+    #print(scoring[i])
+    #print(i)
+    #print(scoring.index(temp))
+
+    if scoring[i] == temp and i != scoring.index(temp):
+      f = False
+    #print(f)
+  if f:
+    winner = scoring.index(temp)
+  else:
+    #print('hi')
+    arblist = []
+    for i in range(len(scoring)):
+      if scoring[i] == max(scoring):
+        #f = False
+        if i == 0:
+          x = (quality(pl1)[2])
+        elif i == 1:
+          x = (quality(pl2)[2])
+        elif i == 2:
+          x = (quality(pl3)[2])
+        elif i == 3:
+          x = (quality(pl4)[2])
+        elif i == 4:
+          x = (quality(pl5)[2])
+        elif i == 5:
+          x = (quality(pl6)[2])
+        elif i == 6:
+          x = (quality(pl7)[2])
+        elif i == 7:
+          x = (quality(pl8)[2])
+        elif i == 8:
+          x = (quality(pl9)[2])
+        elif i == 9:
+          x = (quality(pl10)[2])
+        arblist.append(x)
+      else:
+        arblist.append(0)
+
+    #print(arblist)
+    temp = max(arblist)
+    #print(temp)
+    f = True
+
+    for i in range(len(arblist)):
+      if arblist[i] == temp and i != arblist.index(temp):
+        f = False
+      #print(f)
+    if f:
+      winner = arblist.index(max(arblist))
+    else:
+      #arblist.append(quality(pl4[2]))
+      #winner = arblist.index(max(arblist))
+
+      #f = True
+      #for scorea in arblist:
+      #if scorea == max(arblist) and arblist.index(scorea) != winner:
+      # f = False
+      #if f == False:
+      arblistt = []
+      for i in range(len(arblist)):
+        if arblist[i] == max(arblist):
+
+          if i == 0:
+            #print(quality(pl1)[3])
+            x = (quality(pl1)[3])
+          elif i == 1:
+            x = (quality(pl2)[3])
+          elif i == 2:
+            x = (quality(pl3)[3])
+          elif i == 3:
+            x = (quality(pl4)[3])
+          elif i == 4:
+            x = (quality(pl5)[3])
+          elif i == 5:
+            x = (quality(pl6)[3])
+          elif i == 6:
+            x = (quality(pl7)[3])
+          elif i == 7:
+            x = (quality(pl8)[3])
+          elif i == 8:
+            x = (quality(pl9)[3])
+          elif i == 9:
+            x = (quality(pl10)[3])
+          arblistt.append(x)
+        else:
+          arblistt.append(0)
+
+        #winner = arblistt.index(max(arblistt)) #arb3
+      #print(arblistt)
+      temp = max(arblistt)
+      #print(temp)
+      f = True
+      for i in range(len(arblistt)):
+        if arblistt[i] == temp and i != arblistt.index(temp):
+          f = False
+        #print(f)
+      if f:
+        winner = arblistt.index(max(arblistt))
+      else:
+        #f = True
+        #for scorea in arblistt:
+        #if scorea == max(arblistt) and arblistt.index(scorea) != winner:
+        #   f = False
+        #if f == False:
+        arblisttt = []
+        for i in range(len(arblistt)):
+          if arblistt[i] == max(arblistt):
+
+            if i == 0:
+              x = (quality(pl1)[4])
+            elif i == 1:
+              x = (quality(pl2)[4])
+            elif i == 2:
+              x = (quality(pl3)[4])
+            elif i == 3:
+              x = (quality(pl4)[4])
+            elif i == 4:
+              x = (quality(pl5)[4])
+            elif i == 5:
+              x = (quality(pl6)[4])
+            elif i == 6:
+              x = (quality(pl7)[4])
+            elif i == 7:
+              x = (quality(pl8)[4])
+            elif i == 8:
+              x = (quality(pl9)[4])
+            elif i == 9:
+              x = (quality(pl10)[4])
+            arblisttt.append(x)
+
+          else:
+            arblisttt.append(0)
+
+        #print(arblisttt)
+        temp = max(arblisttt)
+        #print(temp)
+        f = True
+        for i in range(len(arblisttt)):
+          if arblisttt[i] == temp and i != arblisttt.index(temp):
+            f = False
+          #print(f)
+        if f:
+          winner = arblisttt.index(max(arblisttt))
+        else:
+          #winner = arblisttt.index(max(arblisttt)) #arb4
+
+          # f = True
+          #  for scorea in arblist:
+          #  if scorea == max(arblist) and arblist.index(scorea) != winner:
+          #      f = False
+          #if f == False:
+          arblistttt = []
+          for i in range(len(arblisttt)):
+            if arblisttt[i] == max(arblisttt):
+
+              if i == 0:
+                x = (quality(pl1)[5])
+              elif i == 1:
+                x = (quality(pl2)[5])
+              elif i == 2:
+                x = (quality(pl3)[5])
+              elif i == 3:
+                x = (quality(pl4)[5])
+              elif i == 4:
+                x = (quality(pl5)[5])
+              elif i == 5:
+                x = (quality(pl6)[5])
+              elif i == 6:
+                x = (quality(pl7)[5])
+              elif i == 7:
+                x = (quality(pl8)[5])
+              elif i == 8:
+                x = (quality(pl9)[5])
+              elif i == 9:
+                x = (quality(pl10)[5])
+              arblistttt.append(x)
+
+            else:
+              arblistttt.append(0)
+
+
+
+
+          #print(arblisttt)
+          temp = max(arblistttt)
+          #print(temp)
+          f = True
+          for i in range(len(arblistttt)):
+            if arblistttt[i] == temp and i != arblistttt.index(temp):
+              f = False
+            #print(f)
+          if f:
+            winner = arblistttt.index(max(arblistttt))
+          else:
+            #winner = arblisttt.index(max(arblisttt)) #arb4
+
+            # f = True
+            #  for scorea in arblist:
+            #  if scorea == max(arblist) and arblist.index(scorea) != winner:
+            #      f = False
+            #if f == False:
+            arblisttttt = []
+            for i in range(len(arblistttt)):
+              if arblistttt[i] == max(arblistttt):
+
+                if i == 0:
+                  x = (quality(pl1)[5])
+                elif i == 1:
+                  x = (quality(pl2)[5])
+                elif i == 2:
+                  x = (quality(pl3)[5])
+                elif i == 3:
+                  x = (quality(pl4)[5])
+                elif i == 4:
+                  x = (quality(pl5)[5])
+                elif i == 5:
+                  x = (quality(pl6)[5])
+                elif i == 6:
+                  x = (quality(pl7)[5])
+                elif i == 7:
+                  x = (quality(pl8)[5])
+                elif i == 8:
+                  x = (quality(pl9)[5])
+                elif i == 9:
+                  x = (quality(pl10)[5])
+                arblisttttt.append(x)
+
+              else:
+                arblisttttt.append(0)
+          #print(scoring,arblist,arblistt,arblisttt,arblistttt,arblisttttt)
+          #print(arblistttt)
+            temp = max(arblisttttt)
+          #print(temp)
+            f = True
+            for i in range(len(arblisttttt)):
+              if arblisttttt[i] == temp and i != arblisttttt.index(temp):
+                f = False
+              #print('tie')
+            if f:
+              winner = arblisttttt.index(max(arblisttttt))
+          #elif f == False:
+          #winner = arblistttt.index(max(arblistttt)) #arb5
+          #  f = True
+          #     for scorea in arblist:
+          #   if scorea == max(arblist) and arblist.index(scorea) != winner:
+
+ # print(quality(pl1))
+ # print(quality(pl2))
+#  print(quality(pl3))
+ # print(quality(pl4))
+ # print(quality(pl5))
+  #print(quality(pl6))
+  #print(quality(pl7))
+  #print(quality(pl8))
+  #print(quality(pl9))
+  #print(quality(pl10))
+
+  if f:
+    print(f'Player {winner+1} wins!')
+    if winner + 1 == 1 and f == True:
+      win = True
+    else:
+      win = False
+
+  else:
+    print('tie')
+    win = False
+  tot.append(win)
+suc = tot.count(True)
+#print(tot)
+#print(suc/len(tot))
+print(f'{(suc*100)/len(tot)}%')
